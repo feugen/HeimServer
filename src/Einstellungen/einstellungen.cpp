@@ -22,14 +22,28 @@ void Einstellungen::parsejson(){
                 if(it_o.key()=="Name"){
                     datenbankname = *it_o;
                 }
-                if(it_o.key()=="Pfad"){
+                else if(it_o.key()=="Pfad"){
                     datenbankpfad = *it_o;
                 }
-                if(it_o.key()=="Host"){
+                else if(it_o.key()=="Host"){
                     datenbankhost = *it_o;
                 }
-                if(it_o.key()=="Port"){
+                else if(it_o.key()=="Port"){
                     datenbankport = *it_o;
+                }
+            }
+        }
+        if(it.key() == "Seriel"){
+            nlohmann::json jsonobject = *it;
+            for(nlohmann::json::iterator it_o = jsonobject.begin(); it_o != jsonobject.end(); ++it_o){
+                if(it_o.key() == "Pfad"){
+                    serielPfad = *it_o;
+                }
+                else if(it_o.key() == "Baud"){
+                    serielPort = *it_o;
+                }
+                else if(it_o.key() == "NeueZeile"){
+                    serielNeueZeile = *it_o;
                 }
             }
         }

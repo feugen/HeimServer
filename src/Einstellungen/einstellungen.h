@@ -5,10 +5,16 @@
 class Einstellungen{
 private:
     std::string jsonPfad = "/home/efischer/Dokumente/Programmierung/Projekte/C++/HeimServer/HeimServer/einstellungen.json";
-    std::string datenbankname;
-    std::string datenbankpfad;
-    std::string datenbankhost;
-    std::string datenbankport;
+    //Datenbankeinstellungen
+    std::string datenbankName;
+    std::string datenbankPfad;
+    std::string datenbankHost;
+    std::string datenbankPort;
+    //Serieller Port
+    std::string serielPfad;
+    std::string serielNeueZeile;
+    signed int serielPort;
+    //Log Einstellungen
     bool loging;
 public:
     Einstellungen();

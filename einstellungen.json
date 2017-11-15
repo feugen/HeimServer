@@ -4,6 +4,11 @@
 		"Pfad": "sqlite.db",
 		"Host": "",
 		"Port": ""
-	},
+		},
+	"Seriel": {
+		"Pfad": "/dev/rfcomm0",
+		"Baud": 9600,
+		"NeueZeile": "CR+LF"
+		},
 	"Loging": true
 }
