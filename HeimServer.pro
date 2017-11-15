@@ -42,4 +42,5 @@ HEADERS += \
     src/Ueberwachung/alarm.h \
     src/Ueberwachung/anwesenheit.h \
     src/Ueberwachung/bewegungsmelder.h \
-    src/Ueberwachung/video.h
+    src/Ueberwachung/video.h \
+    ext/json/json.hpp

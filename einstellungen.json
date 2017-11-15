@@ -1,0 +1,9 @@
+{
+	"Datenbank": {
+		"Name": "SQLite",
+		"Pfad": "sqlite.db",
+		"Host": "",
+		"Port": ""
+	},
+	"Loging": true
+}
