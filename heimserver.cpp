@@ -1,5 +1,7 @@
 #include <iostream>
 #include "src/Einstellungen/einstellungen.h"
+#include "src/Verbindung/verbindung.h"
+#include "src/Verbindung/bluetooth.h"
 #include "ext/json/json.hpp"
 #include <fstream>
 
@@ -8,8 +10,10 @@ const std::string versionsnummer = "0.0.1";
 
 int main()
 {
-    Einstellungen a;
+    Einstellungen einst;
+    Verbindung verbindungsdaten(einst);
+    Bluetooth blue(verbindungsdaten);
 
-
+    blue.verbindungAufbauen();
     return 0;
 }

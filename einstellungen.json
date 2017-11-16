@@ -10,5 +10,6 @@
 		"Baud": 9600,
 		"NeueZeile": "CR+LF"
 		},
+	"Onlinequelle": "DWD",
 	"Loging": true
 }

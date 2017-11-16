@@ -4,7 +4,26 @@
 #include <fstream>
 
 Einstellungen::Einstellungen(){
+}
+
+void Einstellungen::einstellungenLaden(){
     parsejson();
+}
+
+dbStruct Einstellungen::datenbankLaden() const{
+    return db;
+}
+
+serielStruct Einstellungen::serielVerbindungLaden() const{
+    return seriel;
+}
+
+std::string Einstellungen::onlineDatenquelleLaden() const{
+    return onlineDatenquelle;
+}
+
+bool Einstellungen::logingLaden() const{
+    return loging;
 }
 
 void Einstellungen::parsejson(){
@@ -20,16 +39,16 @@ void Einstellungen::parsejson(){
             nlohmann::json jsonobject = *it;
             for(nlohmann::json::iterator it_o = jsonobject.begin(); it_o != jsonobject.end(); ++it_o){
                 if(it_o.key()=="Name"){
-                    datenbankname = *it_o;
+                    db.datenbankName = *it_o;
                 }
                 else if(it_o.key()=="Pfad"){
-                    datenbankpfad = *it_o;
+                    db.datenbankPfad = *it_o;
                 }
                 else if(it_o.key()=="Host"){
-                    datenbankhost = *it_o;
+                    db.datenbankHost = *it_o;
                 }
                 else if(it_o.key()=="Port"){
-                    datenbankport = *it_o;
+                    db.datenbankPort = *it_o;
                 }
             }
         }
@@ -37,15 +56,18 @@ void Einstellungen::parsejson(){
             nlohmann::json jsonobject = *it;
             for(nlohmann::json::iterator it_o = jsonobject.begin(); it_o != jsonobject.end(); ++it_o){
                 if(it_o.key() == "Pfad"){
-                    serielPfad = *it_o;
+                    seriel.serielPfad = *it_o;
                 }
                 else if(it_o.key() == "Baud"){
-                    serielPort = *it_o;
+                    seriel.serielPort = *it_o;
                 }
                 else if(it_o.key() == "NeueZeile"){
-                    serielNeueZeile = *it_o;
+                    seriel.serielNeueZeile = *it_o;
                 }
             }
+        }
+        if(it.key() == "Onlinequelle"){
+            onlineDatenquelle = *it;
         }
         if(it.key() == "Loging"){
             loging = *it;
