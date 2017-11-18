@@ -68,13 +68,14 @@ void Einstellungen::parseJson(){
             //Erzeuge einen Iterator um das Jason Sub Objekt zu durchsuchen.
             nlohmann::json jsonobject = *it;
             for(nlohmann::json::iterator it_o = jsonobject.begin(); it_o != jsonobject.end(); ++it_o){
-                if(it_o.key() == "Pfad"){
+                jsonKey = it_o.key();
+                if(jsonKey.compare("Pfad") == 0){
                     seriellStVec[verbindungsnummer].seriellPfad = *it_o;
                 }
-                else if(it_o.key() == "Baud"){
+                else if(jsonKey.compare("Baud") == 0){
                     seriellStVec[verbindungsnummer].seriellPort = *it_o;
                 }
-                else if(it_o.key() == "NeueZeile"){
+                else if(jsonKey.compare("NeueZeile") == 0){
                     seriellStVec[verbindungsnummer].seriellNeueZeile = *it_o;
                 }
             }
