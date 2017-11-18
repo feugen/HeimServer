@@ -1,15 +1,17 @@
 #ifndef EINSTELLUNGEN_H
 #define EINSTELLUNGEN_H
 #include <iostream>
+#include <vector>
 
-struct serielStruct{
-    std::string serielPfad;
-    std::string serielNeueZeile;
-    signed int serielPort;
+//Serielle Verbindung
+struct seriellStruct{
+    std::string seriellPfad;
+    std::string seriellNeueZeile;
+    signed int seriellPort;
 };
 
+//Datenbankeinstellungen
 struct dbStruct{
-    //Datenbankeinstellungen
     std::string datenbankName;
     std::string datenbankPfad;
     std::string datenbankHost;
@@ -19,21 +21,16 @@ struct dbStruct{
 class Einstellungen{
 private:
     std::string jsonPfad = "/home/efischer/Dokumente/Programmierung/Projekte/C++/HeimServer/HeimServer/einstellungen.json";
-    //Datenbankeinstellungen
     struct dbStruct db;
-    //Serielle Verbindung
-    struct serielStruct seriel;
-    //Online Datenquelle
+    std::vector<struct seriellStruct> seriellStVec;
     std::string onlineDatenquelle;
-    //Log Einstellungen
     bool loging;
-    //Methoden
-    void parsejson();
+    void parseJson();
 public:
     Einstellungen();
     void einstellungenLaden();
     dbStruct datenbankLaden() const;
-    serielStruct serielVerbindungLaden() const;
+    std::vector<struct seriellStruct> serielleVerbindungLaden() const;
     std::string onlineDatenquelleLaden() const;
     bool logingLaden() const;
 };

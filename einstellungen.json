@@ -1,15 +1,20 @@
 {
+	"Onlinequelle": "DWD",
+	"Loging": true,
 	"Datenbank": {
 		"Name": "SQLite",
 		"Pfad": "sqlite.db",
 		"Host": "",
 		"Port": ""
-		},
-	"Seriel": {
+	},
+	"Seriel_0": {
 		"Pfad": "/dev/rfcomm0",
 		"Baud": 9600,
 		"NeueZeile": "CR+LF"
-		},
-	"Onlinequelle": "DWD",
-	"Loging": true
+	},
+	"Seriel_1": {
+		"Pfad": "/dev/rfcomm0",
+		"Baud": 9600,
+		"NeueZeile": "CR+LF"
+	}
 }

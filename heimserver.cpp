@@ -10,10 +10,14 @@ const std::string versionsnummer = "0.0.1";
 
 int main()
 {
-    Einstellungen einst;
-    Verbindung verbindungsdaten(einst);
-    Bluetooth blue(verbindungsdaten);
+    Einstellungen einstellungen;
+    Verbindung verbindungsdaten(einstellungen);
 
-    blue.verbindungAufbauen();
+    //Mit Anzahl der seriellen Verbindungen, kann man Threads starten.
+    std::cout << verbindungsdaten.anzahlSerielleVerbindungen();
+
+    //boost::asio::serial_port *serVerbindung[];
+    //*serVerbindung[0] = verbindungsdaten.starteSerielleVerbindung();
+
     return 0;
 }

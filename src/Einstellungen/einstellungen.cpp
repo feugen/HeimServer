@@ -4,18 +4,19 @@
 #include <fstream>
 
 Einstellungen::Einstellungen(){
+    einstellungenLaden();
 }
 
 void Einstellungen::einstellungenLaden(){
-    parsejson();
+    parseJson();
 }
 
 dbStruct Einstellungen::datenbankLaden() const{
     return db;
 }
 
-serielStruct Einstellungen::serielVerbindungLaden() const{
-    return seriel;
+std::vector<seriellStruct> Einstellungen::serielleVerbindungLaden() const{
+    return seriellStVec;
 }
 
 std::string Einstellungen::onlineDatenquelleLaden() const{
@@ -26,7 +27,7 @@ bool Einstellungen::logingLaden() const{
     return loging;
 }
 
-void Einstellungen::parsejson(){
+void Einstellungen::parseJson(){
 
     nlohmann::json jsonToken;
     std::ifstream einstellungen(jsonPfad);
@@ -34,8 +35,10 @@ void Einstellungen::parsejson(){
     einstellungen >> jsonToken;
 
     for (nlohmann::json::iterator it = jsonToken.begin(); it != jsonToken.end(); ++it) {
-        std::cout << it.key();
-        if(it.key() == "Datenbank"){
+        std::string jsonKey = it.key();
+        std::string suchvorlage = "Seriel_";
+
+        if(jsonKey.compare("Datenbank") == 0){
             nlohmann::json jsonobject = *it;
             for(nlohmann::json::iterator it_o = jsonobject.begin(); it_o != jsonobject.end(); ++it_o){
                 if(it_o.key()=="Name"){
@@ -52,25 +55,29 @@ void Einstellungen::parsejson(){
                 }
             }
         }
-        if(it.key() == "Seriel"){
+        if(jsonKey.compare("Onlinequelle") == 0){
+            onlineDatenquelle = *it;
+        }
+        if(jsonKey.compare("Loging") == 0){
+            loging = *it;
+        }
+        if(jsonKey.find(suchvorlage) == 0 && (jsonKey.length() - suchvorlage.length()) == 1){
+            int verbindungsnummer = std::atoi(jsonKey.substr(jsonKey.length()-1,1).c_str());
+            //Füge eine Strukturelement dem Vectorarry zu, da ein Serialeintrag in Json gefunden.
+            seriellStVec.push_back(seriellStruct());
+            //Erzeuge einen Iterator um das Jason Sub Objekt zu durchsuchen.
             nlohmann::json jsonobject = *it;
             for(nlohmann::json::iterator it_o = jsonobject.begin(); it_o != jsonobject.end(); ++it_o){
                 if(it_o.key() == "Pfad"){
-                    seriel.serielPfad = *it_o;
+                    seriellStVec[verbindungsnummer].seriellPfad = *it_o;
                 }
                 else if(it_o.key() == "Baud"){
-                    seriel.serielPort = *it_o;
+                    seriellStVec[verbindungsnummer].seriellPort = *it_o;
                 }
                 else if(it_o.key() == "NeueZeile"){
-                    seriel.serielNeueZeile = *it_o;
+                    seriellStVec[verbindungsnummer].seriellNeueZeile = *it_o;
                 }
             }
-        }
-        if(it.key() == "Onlinequelle"){
-            onlineDatenquelle = *it;
-        }
-        if(it.key() == "Loging"){
-            loging = *it;
         }
     }
 }
