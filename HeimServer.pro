@@ -11,10 +11,11 @@ SOURCES += \
     src/Datenbank/sqlite.cpp \
     src/Datenbank/statistik.cpp \
     src/Einstellungen/einstellungen.cpp \
-    src/Logging/logging.cpp \
+    src/Einstellungen/logging.cpp \
     src/Verbindung/verbindung.cpp \
     src/Verbindung/tcpip.cpp \
-    src/Verbindung/serielllesen.cpp \
+    src/Verbindung/seriell.cpp \
+    src/Verbindung/validierung.cpp \
     src/Wetter/wetter.cpp \
     src/Wetter/arduino.cpp \
     src/Wetter/openweather.cpp \
@@ -23,7 +24,6 @@ SOURCES += \
     src/Ueberwachung/anwesenheit.cpp \
     src/Ueberwachung/bewegungsmelder.cpp \
     src/Ueberwachung/video.cpp \
-    src/Validierung/validierung.cpp \
     heimserver.cpp \
 
 
@@ -33,10 +33,11 @@ HEADERS += \
     src/Datenbank/sqlite.h \
     src/Datenbank/statistik.h \
     src/Einstellungen/einstellungen.h \
-    src/Logging/logging.h \
+    src/Einstellungen/logging.h \
     src/Verbindung/verbindung.h \
     src/Verbindung/tcpip.h \
-    src/Verbindung/serielllesen.h \
+    src/Verbindung/seriell.h \
+    src/Verbindung/validierung.h \
     src/Wetter/wetter.h \
     src/Wetter/arduino.h \
     src/Wetter/openweather.h \
@@ -45,5 +46,4 @@ HEADERS += \
     src/Ueberwachung/anwesenheit.h \
     src/Ueberwachung/bewegungsmelder.h \
     src/Ueberwachung/video.h \
-    src/Validierung/validierung.h \
     ext/json/json.hpp \

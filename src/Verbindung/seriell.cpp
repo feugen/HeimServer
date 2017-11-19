@@ -1,14 +1,14 @@
-#include "serielllesen.h"
+#include "seriell.h"
 
-SeriellLesen::SeriellLesen(boost::asio::serial_port &a){
+Seriell::Seriell(boost::asio::serial_port &a){
     serVer = &a;
 }
 
-boost::asio::serial_port *SeriellLesen::ladeVerbindung(){
+boost::asio::serial_port *Seriell::ladeVerbindung(){
     return serVer;
 }
 
-std::string SeriellLesen::arduinoAuslesen(){
+std::string Seriell::arduinoAuslesen(){
     char c;
     std::string resultat;
     bool anfang_gefunden = false;

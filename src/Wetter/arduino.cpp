@@ -1,6 +1,6 @@
 #include "arduino.h"
 
-Arduino::Arduino()
-{
+
+Arduino::Arduino(boost::asio::serial_port &SerielleVerbindung) : Seriell(SerielleVerbindung){
 
 }

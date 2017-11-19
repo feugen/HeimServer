@@ -5,11 +5,11 @@
 #include "ext/json/json.hpp"
 
 
-class SeriellLesen{
+class Seriell{
 private:
     boost::asio::serial_port *serVer;
 public:
-    SeriellLesen(boost::asio::serial_port &a);
+    Seriell(boost::asio::serial_port &a);
     boost::asio::serial_port* ladeVerbindung();
     std::string arduinoAuslesen();
 };
