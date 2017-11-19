@@ -23,7 +23,9 @@ SOURCES += \
     src/Ueberwachung/anwesenheit.cpp \
     src/Ueberwachung/bewegungsmelder.cpp \
     src/Ueberwachung/video.cpp \
+    src/Validierung/validierung.cpp \
     heimserver.cpp \
+
 
 HEADERS += \
     src/Datenbank/datenbank.h \
@@ -43,4 +45,5 @@ HEADERS += \
     src/Ueberwachung/anwesenheit.h \
     src/Ueberwachung/bewegungsmelder.h \
     src/Ueberwachung/video.h \
+    src/Validierung/validierung.h \
     ext/json/json.hpp \

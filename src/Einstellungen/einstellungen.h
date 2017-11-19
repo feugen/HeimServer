@@ -2,6 +2,7 @@
 #define EINSTELLUNGEN_H
 #include <iostream>
 #include <vector>
+#include "ext/json/json.hpp"
 
 //Serielle Verbindung
 struct seriellStruct{

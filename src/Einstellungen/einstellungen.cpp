@@ -1,6 +1,5 @@
 #include "einstellungen.h"
 #include <iostream>
-#include "ext/json/json.hpp"
 #include <fstream>
 
 Einstellungen::Einstellungen(){

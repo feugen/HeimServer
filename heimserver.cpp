@@ -19,22 +19,9 @@ int main()
         boost::asio::serial_port SerielleVerbindung = verbindungsdaten.starteSerielleVerbindung(0);
         SeriellLesen serLesenInstanz(SerielleVerbindung);
 
-        char c;
-
-        std::string res;
-        bool anfang_gefunden = false;
-        while (true) {
-            boost::asio::read(*serLesenInstanz.ladeVerbindung(), boost::asio::buffer(&c,1));
-            if (c == '{' || anfang_gefunden){
-                anfang_gefunden = true;
-                res+=c;
-                if (res.back() == '}'){
-                    break;
-                }
-            }
+        while(true){
+            std::cout << serLesenInstanz.arduinoAuslesen() << std::endl;
         }
-
-        std::cout<< res << std::endl;
     }
     return 0;
 }
