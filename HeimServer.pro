@@ -13,9 +13,8 @@ SOURCES += \
     src/Einstellungen/einstellungen.cpp \
     src/Logging/logging.cpp \
     src/Verbindung/verbindung.cpp \
-    src/Verbindung/bluetooth.cpp \
-    src/Verbindung/nfs.cpp \
     src/Verbindung/tcpip.cpp \
+    src/Verbindung/serielllesen.cpp \
     src/Wetter/wetter.cpp \
     src/Wetter/arduino.cpp \
     src/Wetter/openweather.cpp \
@@ -24,7 +23,7 @@ SOURCES += \
     src/Ueberwachung/anwesenheit.cpp \
     src/Ueberwachung/bewegungsmelder.cpp \
     src/Ueberwachung/video.cpp \
-    heimserver.cpp
+    heimserver.cpp \
 
 HEADERS += \
     src/Datenbank/datenbank.h \
@@ -34,9 +33,8 @@ HEADERS += \
     src/Einstellungen/einstellungen.h \
     src/Logging/logging.h \
     src/Verbindung/verbindung.h \
-    src/Verbindung/bluetooth.h \
-    src/Verbindung/nfs.h \
     src/Verbindung/tcpip.h \
+    src/Verbindung/serielllesen.h \
     src/Wetter/wetter.h \
     src/Wetter/arduino.h \
     src/Wetter/openweather.h \
@@ -45,4 +43,4 @@ HEADERS += \
     src/Ueberwachung/anwesenheit.h \
     src/Ueberwachung/bewegungsmelder.h \
     src/Ueberwachung/video.h \
-    ext/json/json.hpp
+    ext/json/json.hpp \

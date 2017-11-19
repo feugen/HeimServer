@@ -8,12 +8,7 @@
 		"Port": ""
 	},
 	"Seriel_0": {
-		"Pfad": "/dev/rfcomm0",
-		"Baud": 9600,
-		"NeueZeile": "CR+LF"
-	},
-	"Seriel_1": {
-		"Pfad": "/dev/rfcomm0",
+		"Pfad": "/dev/ttyACM0",
 		"Baud": 9600,
 		"NeueZeile": "CR+LF"
 	}
