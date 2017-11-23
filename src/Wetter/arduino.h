@@ -7,6 +7,7 @@ private:
 
 public:
     Arduino(boost::asio::serial_port &SerielleVerbindung);
+    std::string arduinoAuslesen();
 };
 
 #endif // ARDUINO_H

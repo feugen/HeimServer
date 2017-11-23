@@ -19,7 +19,7 @@ int main()
 
         boost::asio::serial_port SerielleVerbindung = verbindungsdaten.starteSerielleVerbindung(0);
 
-        //Starte die Arduino Verbindung, sie ist immer die Nummer 0, liefert nur Wetterdaten
+        //Starte die Arduino Verbindung, sie braucht die generelle serielle Verbindung, diese ist immer die Nummer 0, liefert nur Wetterdaten
         Arduino arduinoInstanz(SerielleVerbindung);
         std::string arduinoString;
         while(true){
