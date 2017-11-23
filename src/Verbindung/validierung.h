@@ -6,11 +6,11 @@
 
 class Validierung{
 private:
-    static std::map<std::string, bool> stringmap;
-public:
     Validierung();
-    //Zutun Referenz auf string wird nicht akzeptiert, wieso?
-    static std::map<std::string, bool> jsonValidiert(const std::string);
+    Validierung(const Validierung& other);
+    Validierung& operator =(const Validierung& other);
+public:
+    static std::map<std::string, bool> jsonValidiert(const std::string &a);
 };
 
 #endif // VALIDIERUNG_H

@@ -11,6 +11,7 @@ private:
 public:
     Seriell(boost::asio::serial_port &a);
     boost::asio::serial_port* ladeVerbindung();
+//Zu tun, als protected deklarieren, Fehler beheben, der dann auftaucht.
     std::string arduinoAuslesen();
 };
 

@@ -1,8 +1,9 @@
 #include <iostream>
 #include "src/Einstellungen/einstellungen.h"
 #include "src/Verbindung/verbindung.h"
-#include "src/Verbindung/serielllesen.h"
+#include "src/Verbindung/seriell.h"
 #include "src/Wetter/arduino.h"
+#include "src/Verbindung/validierung.h"
 #include "ext/json/json.hpp"
 #include <fstream>
 #include <boost/asio.hpp>
@@ -17,10 +18,18 @@ int main()
     if (verbindungsdaten.anzahlSerielleVerbindungen() > 0){
 
         boost::asio::serial_port SerielleVerbindung = verbindungsdaten.starteSerielleVerbindung(0);
-        Arduino arduinoInstanz(SerielleVerbindung);
 
+        //Starte die Arduino Verbindung, sie ist immer die Nummer 0, liefert nur Wetterdaten
+        Arduino arduinoInstanz(SerielleVerbindung);
+        std::string arduinoString;
         while(true){
-            std::cout << arduinoInstanz.arduinoAuslesen() << std::endl;
+            arduinoString = arduinoInstanz.arduinoAuslesen();
+            if (Validierung::jsonValidiert(arduinoString).at(arduinoString)){
+                std::cout << arduinoString << std::endl;
+
+                //Zutun Füge die Daten in die Arduino Wetterdatenbank ein.
+                //Prüfe Verbindung ob sie noch besteht, wenn nicht so break, oder neue Verbindung aufbauen oder kombiniert
+            }
         }
     }
     return 0;

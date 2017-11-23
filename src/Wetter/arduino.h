@@ -1,6 +1,6 @@
 #ifndef ARDUINO_H
 #define ARDUINO_H
-#include "src/Verbindung/serielllesen.h"
+#include "src/Verbindung/seriell.h"
 
 class Arduino: public Seriell{
 private:
