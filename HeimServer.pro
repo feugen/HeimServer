@@ -3,12 +3,10 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
-LIBS += -L/usr/lib/x86_64-linux-gnu -lboost_system
+LIBS += -L/usr/lib/x86_64-linux-gnu -lboost_system -lsqlite3
 
 SOURCES += \
     src/Datenbank/datenbank.cpp \
-    src/Datenbank/mariadb.cpp \
-    src/Datenbank/sqlite.cpp \
     src/Datenbank/statistik.cpp \
     src/Einstellungen/einstellungen.cpp \
     src/Einstellungen/logging.cpp \
@@ -16,7 +14,6 @@ SOURCES += \
     src/Verbindung/tcpip.cpp \
     src/Verbindung/seriell.cpp \
     src/Verbindung/validierung.cpp \
-    src/Wetter/wetter.cpp \
     src/Wetter/arduino.cpp \
     src/Wetter/openweather.cpp \
     src/Ueberwachung/ueberwachung.cpp \
@@ -25,12 +22,11 @@ SOURCES += \
     src/Ueberwachung/bewegungsmelder.cpp \
     src/Ueberwachung/video.cpp \
     heimserver.cpp \
+    src/Wetter/dwd.cpp
 
 
 HEADERS += \
     src/Datenbank/datenbank.h \
-    src/Datenbank/mariadb.h \
-    src/Datenbank/sqlite.h \
     src/Datenbank/statistik.h \
     src/Einstellungen/einstellungen.h \
     src/Einstellungen/logging.h \
@@ -38,7 +34,6 @@ HEADERS += \
     src/Verbindung/tcpip.h \
     src/Verbindung/seriell.h \
     src/Verbindung/validierung.h \
-    src/Wetter/wetter.h \
     src/Wetter/arduino.h \
     src/Wetter/openweather.h \
     src/Ueberwachung/ueberwachung.h \
@@ -47,3 +42,4 @@ HEADERS += \
     src/Ueberwachung/bewegungsmelder.h \
     src/Ueberwachung/video.h \
     ext/json/json.hpp \
+    src/Wetter/dwd.h

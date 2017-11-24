@@ -8,7 +8,7 @@
 struct seriellStruct{
     std::string seriellPfad;
     std::string seriellNeueZeile;
-    signed int seriellPort;
+    unsigned int seriellPort;
 };
 
 //Datenbankeinstellungen
@@ -16,7 +16,7 @@ struct dbStruct{
     std::string datenbankName;
     std::string datenbankPfad;
     std::string datenbankHost;
-    std::string datenbankPort;
+    unsigned int datenbankPort;
 };
 
 class Einstellungen{

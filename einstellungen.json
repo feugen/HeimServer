@@ -5,7 +5,7 @@
 		"Name": "SQLite",
 		"Pfad": "sqlite.db",
 		"Host": "",
-		"Port": ""
+		"Port": null
 	},
 	"Seriel_0": {
 		"Pfad": "/dev/ttyACM0",

@@ -50,7 +50,8 @@ void Einstellungen::parseJson(){
                     db.datenbankHost = *it_o;
                 }
                 else if(it_o.key()=="Port"){
-                    db.datenbankPort = *it_o;
+                    std::string zw = it_o.key();
+                    db.datenbankPort = std::atoi(zw.c_str());
                 }
             }
         }

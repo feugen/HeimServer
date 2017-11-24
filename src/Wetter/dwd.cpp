@@ -1,4 +1,4 @@
-#include "wetter.h"
+#include "dwd.h"
 
 Wetter::Wetter()
 {
