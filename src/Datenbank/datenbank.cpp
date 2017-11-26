@@ -4,17 +4,25 @@ Datenbank::Datenbank(Einstellungen& a){
     datenbankdaten = a.datenbankLaden();
 }
 
-int Datenbank::datenbankVerbindungAufbauen()
-{
+int Datenbank::datenbankVerbindungAufbauen(){
     if(datenbankdaten.datenbankName.compare("SQLite") == 0 && !datenbankVerbindungOffen()){
 
-        int db = sqlite3_open(datenbankdaten.datenbankPfad.c_str(), &db_sqlite3);
+        //Zutun, Pfad nicht überschreiben, sollte aus dem Homeverzeichnis abrufbar sein, später diese Zeile entfernen.
+        datenbankdaten.datenbankPfad = "/home/efischer/Dokumente/Programmierung/Projekte/C++/HeimServer/HeimServer/sqlite.db";
+
+        int db = sqlite3_open_v2(datenbankdaten.datenbankPfad.c_str(), &db_sqlite3, SQLITE_OPEN_READWRITE, NULL);
         if(db){
-            return 0;
+            //Funktion sqlite3_open_v2 liefert 14 bei fehlender Datei.
+            if(db == 14){
+                //SQLite Datenbank konnte nicht gefunden werden.
+                sqlite3_close(db_sqlite3);
+                db_sqlite3 = nullptr;
+                throw std::string("SQLite Datenbank konnte nicht gefunden werden.");
+                return 1;
+            }
         }
         else{
-            db_sqlite3 = nullptr;
-            return 1;
+            return 0;
         }
     }
     else if (datenbankdaten.datenbankName.compare("MariaDB") == 0 && !datenbankVerbindungOffen()){
@@ -24,8 +32,7 @@ int Datenbank::datenbankVerbindungAufbauen()
     return 1;
 }
 
-bool Datenbank::datenbankVerbindungOffen()
-{
+bool Datenbank::datenbankVerbindungOffen(){
     if(datenbankdaten.datenbankName.compare("SQLite") == 0){
         if(db_sqlite3 != nullptr){
             return true;

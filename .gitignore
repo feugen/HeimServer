@@ -112,3 +112,4 @@ build/*
 ext/*
 build/debug/*
 !build/debug/*
+*.db
