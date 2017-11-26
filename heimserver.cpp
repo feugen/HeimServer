@@ -16,28 +16,8 @@ int main()
     Einstellungen einstellungen;
     Verbindung verbindungsdaten(einstellungen);
     Datenbank dat(einstellungen);
-    if(dat.datenbankVerbindungOffen()){
-        //Mach gar nichts, alles in Ordnung
-    }
-    else{
-        try{
-            dat.datenbankVerbindungAufbauen();
-        }
-        catch(std::string &str){
-            std::cout << str << std::endl;
-        }
-        if(dat.datenbankVerbindungOffen()){
-            //Mach gar nichts, alles in Ordnung
-        }
-        else{
-            try{
-                throw std::string("Datenbankverbindung konnte zwar aufgebaut werden, aber die Datenbank nicht geöffnet");
-            }
-            catch(std::string &str){
-                std::cout << str << std::endl;
-            }
-        }
-    }
+    dat.datenbankVerbindungPruefenUndGgfAufbauen(dat);
+
     if (verbindungsdaten.anzahlSerielleVerbindungen() > 0){
 
         boost::asio::serial_port SerielleVerbindung = verbindungsdaten.starteSerielleVerbindung(0);

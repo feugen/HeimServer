@@ -8,10 +8,12 @@ class Datenbank{
 private:
     dbStruct datenbankdaten;
     sqlite3 *db_sqlite3 = nullptr;
-public:
-    Datenbank(Einstellungen &a);
     int datenbankVerbindungAufbauen();
     bool datenbankVerbindungOffen();
+public:
+    Datenbank(Einstellungen &a);
+    bool datenbankVerbindungPruefen();
+    void datenbankVerbindungPruefenUndGgfAufbauen(Datenbank &dat);
     void datenbankVereinen();
 };
 

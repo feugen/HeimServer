@@ -4,6 +4,36 @@ Datenbank::Datenbank(Einstellungen& a){
     datenbankdaten = a.datenbankLaden();
 }
 
+bool Datenbank::datenbankVerbindungPruefen(){
+    return datenbankVerbindungOffen();
+}
+
+void Datenbank::datenbankVerbindungPruefenUndGgfAufbauen(Datenbank &dat)
+{
+    if(dat.datenbankVerbindungOffen()){
+        //Mach gar nichts, alles in Ordnung
+    }
+    else{
+        try{
+            dat.datenbankVerbindungAufbauen();
+        }
+        catch(std::string &str){
+            std::cout << str << std::endl;
+        }
+        if(dat.datenbankVerbindungOffen()){
+            //Mach gar nichts, alles in Ordnung
+        }
+        else{
+            try{
+                throw std::string("Datenbankverbindung konnte zwar aufgebaut werden, aber die Datenbank nicht geöffnet");
+            }
+            catch(std::string &str){
+                std::cout << str << std::endl;
+            }
+        }
+    }
+}
+
 int Datenbank::datenbankVerbindungAufbauen(){
     if(datenbankdaten.datenbankName.compare("SQLite") == 0 && !datenbankVerbindungOffen()){
 
