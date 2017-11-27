@@ -81,3 +81,16 @@ bool Datenbank::datenbankVerbindungOffen(){
 void Datenbank::datenbankVereinen(){
     //Zutun
 }
+
+void Datenbank::arduinoWetterDatenInDbImportieren(Arduino &arduinoWetterInstanz){
+    std::string arduinoString;
+    while(true){
+        arduinoString = arduinoWetterInstanz.arduinoAuslesen();
+        if (Validierung::jsonValidiert(arduinoString).at(arduinoString)){
+            std::cout << arduinoString << std::endl;
+            //Zutun Füge die Daten in die Arduino Wetterdatenbank ein.
+
+            //Prüfe Verbindung ob sie noch besteht, wenn nicht so break, oder neue Verbindung aufbauen oder kombiniert
+        }
+    }
+}

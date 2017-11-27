@@ -6,6 +6,7 @@
 
 //Serielle Verbindung
 struct seriellStruct{
+    std::string seriellKennung;
     std::string seriellPfad;
     std::string seriellNeueZeile;
     unsigned int seriellPort;

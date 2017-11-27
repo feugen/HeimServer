@@ -1,6 +1,8 @@
 #ifndef DATENBANK_H
 #define DATENBANK_H
 #include "src/Einstellungen/einstellungen.h"
+#include "src/Wetter/arduino.h"
+#include "src/Verbindung/validierung.h"
 #include <sqlite3.h>
 
 
@@ -15,6 +17,7 @@ public:
     bool datenbankVerbindungPruefen();
     void datenbankVerbindungPruefenUndGgfAufbauen(Datenbank &dat);
     void datenbankVereinen();
+    void arduinoWetterDatenInDbImportieren(Arduino &arduinoWetterInstanz);
 };
 
 #endif // DATENBANK_H

@@ -8,6 +8,7 @@
 		"Port": null
 	},
 	"Seriel_0": {
+		"Kennung": "ArduinoWetter",
 		"Pfad": "/dev/ttyACM0",
 		"Baud": 9600,
 		"NeueZeile": "CR+LF"

@@ -9,30 +9,39 @@
 #include <fstream>
 #include <boost/asio.hpp>
 
-const std::string versionsnummer = "0.0.1";
+constexpr auto versionsnummer = "0.1.0";
 
-int main()
-{
+void threadStarterSerielleVerbindungen(Verbindung &verbindungsdaten, Datenbank &dat, int &Verbindungsnummer){
+
+    boost::asio::serial_port SerielleVerbindung = verbindungsdaten.starteSerielleVerbindung(Verbindungsnummer);
+    SerielleVerbindung = verbindungsdaten.starteSerielleVerbindung(Verbindungsnummer);
+    //Starte die Arduino Verbindung, sie braucht die generelle serielle Verbindung, diese ist immer die Nummer 0, liefert nur Wetterdaten
+    std::vector<struct seriellStruct> a = verbindungsdaten.ladeSerielleVerbindung();
+
+    //Prüfe ob es sich tatsählich um ArduinoWetter handelt.
+    if (a.at(Verbindungsnummer).seriellKennung.compare("ArduinoWetter") == 0){
+        Arduino arduinoWetterInstanz(SerielleVerbindung);
+        //Zutun Vorsicht ob sowas mit Multithreading funktioniert.
+        while(SerielleVerbindung.is_open()){
+            dat.arduinoWetterDatenInDbImportieren(arduinoWetterInstanz);
+        }
+    }
+    else if(1){
+        //Standard Serielle Verbindung starten, evtl für andere Geräte auch separat anpassen, wie für Arduino Wetter.
+    }
+}
+
+int main(){
+
     Einstellungen einstellungen;
     Verbindung verbindungsdaten(einstellungen);
     Datenbank dat(einstellungen);
     dat.datenbankVerbindungPruefenUndGgfAufbauen(dat);
 
     if (verbindungsdaten.anzahlSerielleVerbindungen() > 0){
-
-        boost::asio::serial_port SerielleVerbindung = verbindungsdaten.starteSerielleVerbindung(0);
-
-        //Starte die Arduino Verbindung, sie braucht die generelle serielle Verbindung, diese ist immer die Nummer 0, liefert nur Wetterdaten
-        Arduino arduinoInstanz(SerielleVerbindung);
-        std::string arduinoString;
-        while(true){
-            arduinoString = arduinoInstanz.arduinoAuslesen();
-            if (Validierung::jsonValidiert(arduinoString).at(arduinoString)){
-                std::cout << arduinoString << std::endl;
-
-                //Zutun Füge die Daten in die Arduino Wetterdatenbank ein.
-                //Prüfe Verbindung ob sie noch besteht, wenn nicht so break, oder neue Verbindung aufbauen oder kombiniert
-            }
+        //Serielle Verbindungen in Threads starten
+        for(int i = 0; i <= verbindungsdaten.anzahlSerielleVerbindungen()-1; ++i){
+            threadStarterSerielleVerbindungen(verbindungsdaten, dat, i);
         }
     }
     return 0;
