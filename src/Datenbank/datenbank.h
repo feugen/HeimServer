@@ -5,6 +5,10 @@
 #include "src/Verbindung/validierung.h"
 #include <sqlite3.h>
 
+struct arduinoWetterJASONDaten
+{
+    std::string a;
+};
 
 class Datenbank{
 private:
@@ -12,6 +16,8 @@ private:
     sqlite3 *db_sqlite3 = nullptr;
     int datenbankVerbindungAufbauen();
     bool datenbankVerbindungOffen();
+    void arduinoWetterDatenInSQLiteEinfuegen(std::string &a);
+    arduinoWetterJASONDaten& arduinoWetterJASONParser(std::string &a);
 public:
     Datenbank(Einstellungen &a);
     bool datenbankVerbindungPruefen();

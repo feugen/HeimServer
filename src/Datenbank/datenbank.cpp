@@ -78,6 +78,15 @@ bool Datenbank::datenbankVerbindungOffen(){
     return false;
 }
 
+void Datenbank::arduinoWetterDatenInSQLiteEinfuegen(std::string &a){
+    //Zutun
+    struct arduinoWetterJASONDaten JasonCache = arduinoWetterJASONParser(a);
+}
+
+arduinoWetterJASONDaten Datenbank::arduinoWetterJASONParser(std::string &a){
+    //Zutun
+}
+
 void Datenbank::datenbankVereinen(){
     //Zutun
 }
@@ -87,6 +96,15 @@ void Datenbank::arduinoWetterDatenInDbImportieren(Arduino &arduinoWetterInstanz)
     while(true){
         arduinoString = arduinoWetterInstanz.arduinoAuslesen();
         if (Validierung::jsonValidiert(arduinoString).at(arduinoString)){
+            if(datenbankVerbindungPruefen()){
+                if(datenbankdaten.datenbankName.compare("SQLite" == 0)){
+                    //SQL Querry mit Daten ausführen
+                    arduinoWetterDatenInSQLiteEinfuegen(arduinoString);
+                }
+                else if(datenbankdaten.datenbankName.compare("MariaDB" == 0)){
+
+                }
+            }
             std::cout << arduinoString << std::endl;
             //Zutun Füge die Daten in die Arduino Wetterdatenbank ein.
 
