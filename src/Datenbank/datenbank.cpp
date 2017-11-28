@@ -64,7 +64,7 @@ int Datenbank::datenbankVerbindungAufbauen(){
 
 bool Datenbank::datenbankVerbindungOffen(){
     if(datenbankdaten.datenbankName.compare("SQLite") == 0){
-        if(db_sqlite3 != nullptr){
+        if(db_sqlite3 != nullptr && !sqlite3_open_v2(datenbankdaten.datenbankPfad.c_str(), &db_sqlite3, SQLITE_OPEN_READWRITE, NULL)){
             return true;
         }
         else{
@@ -128,16 +128,19 @@ void Datenbank::arduinoWetterDatenInDbImportieren(Arduino &arduinoWetterInstanz)
             if(datenbankVerbindungPruefen()){
                 if((datenbankdaten.datenbankName.compare("SQLite") == 0)){
                     //SQL Querry mit Daten ausführen
-                    //arduinoWetterDatenInSQLiteEinfuegen(arduinoString);
+                    arduinoWetterDatenInSQLiteEinfuegen(arduinoString);
                 }
                 else if((datenbankdaten.datenbankName.compare("MariaDB" )== 0)){
 
                 }
             }
             std::cout << arduinoString << std::endl;
-            //Zutun Füge die Daten in die Arduino Wetterdatenbank ein.
-            arduinoWetterDatenInSQLiteEinfuegen(arduinoString);
-            //Prüfe Verbindung ob sie noch besteht, wenn nicht so break, oder neue Verbindung aufbauen oder kombiniert
+
+            //Prüfe Verbindung ob sie noch besteht, wenn nicht so break
+            if(!datenbankVerbindungOffen()){
+                //Log einfügen
+                break;
+            }
         }
     }
 }
