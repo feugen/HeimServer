@@ -10,7 +10,7 @@ private:
     Validierung(const Validierung& other);
     Validierung& operator =(const Validierung& other);
 public:
-    static std::map<std::string, bool> jsonValidiert(const std::string &a);
+    static std::map<std::string, bool> jsonValidiert(const std::string &zuValidieren);
 };
 
 #endif // VALIDIERUNG_H

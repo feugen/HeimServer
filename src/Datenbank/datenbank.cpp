@@ -79,12 +79,41 @@ bool Datenbank::datenbankVerbindungOffen(){
 }
 
 void Datenbank::arduinoWetterDatenInSQLiteEinfuegen(std::string &a){
-    //Zutun
     struct arduinoWetterJASONDaten JasonCache = arduinoWetterJASONParser(a);
+    //Zutun
 }
 
-arduinoWetterJASONDaten Datenbank::arduinoWetterJASONParser(std::string &a){
-    //Zutun
+arduinoWetterJASONDaten Datenbank::arduinoWetterJASONParser(std::string &ArduinoJasonString){
+
+    arduinoWetterJASONDaten wetterStruc;
+    nlohmann::json j = nlohmann::json::parse(ArduinoJasonString);
+
+    for(nlohmann::json::iterator j_iter = j.begin(); j_iter != j.end(); ++j_iter){
+
+        std::string jsonKey = j_iter.key();
+        if(jsonKey.compare("Luftfeuchte") == 0){
+            wetterStruc.Luftfeuchte = *j_iter;
+        }
+        if(jsonKey.compare("Luftdruck") == 0){
+            wetterStruc.Luftdruck = *j_iter;
+        }
+        if(jsonKey.compare("Photostrom") == 0){
+            wetterStruc.Photostrom = *j_iter;
+        }
+        if(jsonKey.compare("Temperatur") == 0){
+            nlohmann::json j2 = *j_iter;
+            for(nlohmann::json::iterator j_iter2 = j2.begin(); j_iter2 != j2.end(); ++j_iter2 ){
+                jsonKey = j_iter2.key();
+                if(jsonKey.compare("Temp_am2303")){
+                    wetterStruc.Temperatur.Temp_am2303 = *j_iter2;
+                }
+                if(jsonKey.compare("Temp_bmp180")){
+                    wetterStruc.Temperatur.Temp_bmp180 = *j_iter2;
+                }
+            }
+        }
+    }
+    return wetterStruc;
 }
 
 void Datenbank::datenbankVereinen(){
@@ -97,17 +126,17 @@ void Datenbank::arduinoWetterDatenInDbImportieren(Arduino &arduinoWetterInstanz)
         arduinoString = arduinoWetterInstanz.arduinoAuslesen();
         if (Validierung::jsonValidiert(arduinoString).at(arduinoString)){
             if(datenbankVerbindungPruefen()){
-                if(datenbankdaten.datenbankName.compare("SQLite" == 0)){
+                if((datenbankdaten.datenbankName.compare("SQLite") == 0)){
                     //SQL Querry mit Daten ausführen
-                    arduinoWetterDatenInSQLiteEinfuegen(arduinoString);
+                    //arduinoWetterDatenInSQLiteEinfuegen(arduinoString);
                 }
-                else if(datenbankdaten.datenbankName.compare("MariaDB" == 0)){
+                else if((datenbankdaten.datenbankName.compare("MariaDB" )== 0)){
 
                 }
             }
             std::cout << arduinoString << std::endl;
             //Zutun Füge die Daten in die Arduino Wetterdatenbank ein.
-
+            arduinoWetterDatenInSQLiteEinfuegen(arduinoString);
             //Prüfe Verbindung ob sie noch besteht, wenn nicht so break, oder neue Verbindung aufbauen oder kombiniert
         }
     }

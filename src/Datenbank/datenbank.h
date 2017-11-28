@@ -4,10 +4,18 @@
 #include "src/Wetter/arduino.h"
 #include "src/Verbindung/validierung.h"
 #include <sqlite3.h>
+#include "ext/json/json.hpp"
 
-struct arduinoWetterJASONDaten
-{
-    std::string a;
+
+//ArduinoWetter Jason Struktur
+struct arduinoWetterJASONDaten{
+    double Luftfeuchte;
+    double Luftdruck;
+    int Photostrom;
+    struct Temp{
+        double Temp_am2303;
+        double Temp_bmp180;
+    }Temperatur;
 };
 
 class Datenbank{
@@ -17,7 +25,7 @@ private:
     int datenbankVerbindungAufbauen();
     bool datenbankVerbindungOffen();
     void arduinoWetterDatenInSQLiteEinfuegen(std::string &a);
-    arduinoWetterJASONDaten& arduinoWetterJASONParser(std::string &a);
+    arduinoWetterJASONDaten arduinoWetterJASONParser(std::string &ArduinoJasonString);
 public:
     Datenbank(Einstellungen &a);
     bool datenbankVerbindungPruefen();
