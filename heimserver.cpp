@@ -36,7 +36,7 @@ int main(){
     Einstellungen einstellungen;
     Verbindung verbindungsdaten(einstellungen);
     Datenbank dat(einstellungen);
-    dat.datenbankVerbindungPruefenUndGgfAufbauen(dat);
+    dat.datenbankVerbindungOeffnen(dat);
 
     if (verbindungsdaten.anzahlSerielleVerbindungen() > 0){
         //Serielle Verbindungen in Threads starten

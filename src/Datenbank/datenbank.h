@@ -22,16 +22,26 @@ class Datenbank{
 private:
     dbStruct datenbankdaten;
     sqlite3 *db_sqlite3 = nullptr;
-    int datenbankVerbindungAufbauen();
-    bool datenbankVerbindungOffen();
-    void arduinoWetterDatenInSQLiteEinfuegen(std::string &a);
-    arduinoWetterJASONDaten arduinoWetterJASONParser(std::string &ArduinoJasonString);
+    bool datenbankVerbindungSQLiteOeffnen(); //erledigt
+    bool datenbankVerbindungSQLiteIstOffen(); //erledigt
+    bool datenbankVerbindungSQLiteSchliessen(); //Zutun
+
+    bool datenbankVerbindungMariaDBOeffnen(); //Zutun
+    bool datenbankVerbindungMariaDBIstOffen();  //Zutun
+    bool datenbankVerbindungMariaDBSchliessen(); //Zutun
+
+    void arduinoWetterDatenInSQLiteImportieren(std::string &a); //Zutun
+    void arduinoWetterDatenInMariaDBImportieren(std::string &a); //Zutun
+    arduinoWetterJASONDaten arduinoWetterJASONParser(std::string &ArduinoJasonString); //Erledigt
 public:
     Datenbank(Einstellungen &a);
-    bool datenbankVerbindungPruefen();
-    void datenbankVerbindungPruefenUndGgfAufbauen(Datenbank &dat);
-    void datenbankVereinen();
-    void arduinoWetterDatenInDbImportieren(Arduino &arduinoWetterInstanz);
+    virtual ~Datenbank();
+    bool datenbankVerbindungOeffnen(Datenbank &dat); //erledigt
+    bool datenbankVerbindungIstOffen(); //erledigt
+    bool datenbankVerbindungSchliessen(); //erledigt
+
+    void datenbankVereinen(); //Zutun
+    void arduinoWetterDatenInDbImportieren(Arduino &arduinoWetterInstanz); //erledigt
 };
 
 #endif // DATENBANK_H
