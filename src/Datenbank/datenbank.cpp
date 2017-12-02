@@ -106,8 +106,33 @@ void Datenbank::datenbankVereinen(){
 }
 
 void Datenbank::arduinoWetterDatenInSQLiteImportieren(std::string &a){
-    struct arduinoWetterJASONDaten JasonCache = arduinoWetterJASONParser(a);
-    //Zutun
+
+    struct arduinoWetterJASONDaten ArduinoJasonCache = arduinoWetterJASONParser(a);
+    const char * sqlQuerry = "insert into t_ArduinoWetter(Luftfeuchte,Luftdruck,Photostrom,Temp_am2303,Temp_bmp180,Zeitstempel) Values(?,?,?,?,?,?)";
+    static sqlite3_stmt *sql_vorbereitet;
+    auto zeit = std::chrono::system_clock::now();
+    auto zeitstempel = std::chrono::system_clock::to_time_t(zeit);
+
+    int resultat = sqlite3_prepare_v2(db_sqlite3, sqlQuerry, -1, &sql_vorbereitet, nullptr);
+    if(resultat != SQLITE_OK){
+        //In Log Datei ausgeben z.B. so: //NSLog(@"Prepare-error #%i: %s", result, sqlite3_errmsg(_database));
+        std::cout << "Fehler" << std::endl;
+    }
+
+    sqlite3_bind_double(sql_vorbereitet,1,ArduinoJasonCache.Luftfeuchte);
+    sqlite3_bind_double(sql_vorbereitet,2,ArduinoJasonCache.Luftdruck);
+    sqlite3_bind_int(sql_vorbereitet,3,ArduinoJasonCache.Photostrom);
+    sqlite3_bind_double(sql_vorbereitet,4,ArduinoJasonCache.Temperatur.Temp_am2303);
+    sqlite3_bind_double(sql_vorbereitet,5,ArduinoJasonCache.Temperatur.Temp_bmp180);
+    sqlite3_bind_int(sql_vorbereitet,6,zeitstempel);
+
+    resultat = sqlite3_step(sql_vorbereitet);
+    if (resultat != SQLITE_DONE){
+        //In Log Datei ausgeben z.B. so: //NSLog(@"Prepare-error #%i: %s", result, sqlite3_errmsg(_database));
+        std::cout << "Fehler2" << std::endl;
+    }
+
+    sqlite3_finalize(sql_vorbereitet);
 }
 
 void Datenbank::arduinoWetterDatenInMariaDBImportieren(std::string &a){

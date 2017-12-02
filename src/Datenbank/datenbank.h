@@ -5,6 +5,7 @@
 #include "src/Verbindung/validierung.h"
 #include <sqlite3.h>
 #include "ext/json/json.hpp"
+#include <chrono>
 
 
 //ArduinoWetter Jason Struktur
@@ -24,7 +25,7 @@ private:
     sqlite3 *db_sqlite3 = nullptr;
     bool datenbankVerbindungSQLiteOeffnen(); //erledigt
     bool datenbankVerbindungSQLiteIstOffen(); //erledigt
-    bool datenbankVerbindungSQLiteSchliessen(); //Zutun
+    bool datenbankVerbindungSQLiteSchliessen(); //erledigt
 
     bool datenbankVerbindungMariaDBOeffnen(); //Zutun
     bool datenbankVerbindungMariaDBIstOffen();  //Zutun
@@ -32,7 +33,7 @@ private:
 
     void arduinoWetterDatenInSQLiteImportieren(std::string &a); //Zutun
     void arduinoWetterDatenInMariaDBImportieren(std::string &a); //Zutun
-    arduinoWetterJASONDaten arduinoWetterJASONParser(std::string &ArduinoJasonString); //Erledigt
+    arduinoWetterJASONDaten arduinoWetterJASONParser(std::string &ArduinoJasonString); //erledigt
 public:
     Datenbank(Einstellungen &a);
     virtual ~Datenbank();

@@ -23,13 +23,15 @@ struct dbStruct{
 class Einstellungen{
 private:
     std::string jsonPfad = "/home/efischer/Dokumente/Programmierung/Projekte/C++/HeimServer/HeimServer/einstellungen.json";
+    std::string onlineDatenquelle;
     struct dbStruct db;
     std::vector<struct seriellStruct> seriellStVec;
-    std::string onlineDatenquelle;
     bool loging;
     void parseJson();
 public:
     Einstellungen();
+    Einstellungen(const Einstellungen &a) = delete;
+    Einstellungen& operator =(const Einstellungen& a) = delete;
     void einstellungenLaden();
     dbStruct datenbankLaden() const;
     std::vector<struct seriellStruct> serielleVerbindungLaden() const;
